@@ -5,7 +5,12 @@ import loginRoute from './routes/loginRoute.js';
 const app = express();
 
 app.use(express.json());
-app.use(authApiKey);
+// app.use(authApiKey);
+
+
+app.get("/", (req, res) => {
+  res.send("Hello, World!");
+});
 
 app.use("/login", loginRoute)
 
