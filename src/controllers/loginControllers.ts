@@ -11,15 +11,12 @@ export const loginController = async (req: Request, res: Response) => {
 		// "auth/login"
 
 		const url = "https://web.spaggiari.eu/rest/v1/auth/login";
-		console.log("heaeder = " + header);
-		console.log("body = " + body);
 
 		const response = await fetch(url, {
 			method: "POST",
 			headers: header,
 			body: JSON.stringify(body),
 		});
-
 
 		const contentType = response.headers.get("content-type") || "";
 		if (!contentType.includes("application/json")) {

@@ -11,6 +11,13 @@ export const loginController = async (req, res) => {
             headers: header,
             body: JSON.stringify(body),
         });
+        const contentType = response.headers.get("content-type") || "";
+        if (!contentType.includes("application/json")) {
+            const text = await response.text();
+            return res
+                .status(response.status)
+                .json({ message: "Risposta non JSON ricevuta", content: text });
+        }
         const data = await response.json();
         res.status(response.status).json(data);
     }
