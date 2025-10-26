@@ -6,8 +6,3 @@
 [functions]
   node_bundler = "esbuild"
   external_node_modules = ["express", "serverless-http"]
-
-[[redirects]]
-  from = "/api/*"
-  to = "/.netlify/functions/index/:splat"
-  status = 200
