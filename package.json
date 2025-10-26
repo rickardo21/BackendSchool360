@@ -20,8 +20,10 @@
     "typescript": "^5.9.3"
   },
   "dependencies": {
+    "@netlify/functions": "^5.0.1",
     "cors": "^2.8.5",
     "express": "^5.1.0",
-    "node-fetch": "^2.7.0"
+    "node-fetch": "^2.7.0",
+    "serverless-http": "^4.0.0"
   }
 }

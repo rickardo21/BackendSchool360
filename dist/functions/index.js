@@ -1,14 +1,8 @@
 import express from "express";
 import serverless from "serverless-http";
-import { Handler } from "@netlify/functions";
-import { authApiKey } from "./middleware/authApiKey.js";
 import loginRoute from "./routes/loginRoute.js";
-import cors from "cors";
-
 const app = express();
-
 app.use(express.json());
-
 // Se vuoi riattivare CORS:
 // app.use(
 //   cors({
@@ -17,15 +11,12 @@ app.use(express.json());
 //     credentials: true,
 //   })
 // );
-
 app.get("/", (req, res) => {
-	res.send("Hello, World!");
+    res.send("Hello, World!");
 });
-
 app.use("/login", loginRoute);
-
 // Rimuovi app.listen()
 // Esporta invece il handler compatibile con Netlify Functions
 const handler = serverless(app);
-
 export { handler };
+//# sourceMappingURL=index.js.map
