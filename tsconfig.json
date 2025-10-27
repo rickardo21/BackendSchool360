@@ -3,7 +3,7 @@
 		// Percorsi di input e output
 		"rootDir": "./src",
 		// "outDir": "./dist/functions",
-		"outDir": "./dist",
+		"outDir": "./netlify/functions",
 
 		// Compatibilità con Node.js e Netlify Functions
 		"target": "ES2020",
