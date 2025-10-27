@@ -1,9 +1,15 @@
-export function _headers() {
-	var headers = {
+import { Header } from "../models/type.js";
+
+export function _headers(token?: string) {
+	var headers: Header = {
 		"Content-Type": "application/json",
-		"Z-Dev-ApiKey": "Tg1NWEwNGIgIC0K",
-		"User-Agent": "CVVS/std/4.2.3 Android/12",
+		"Z-Dev-ApiKey": process.env.Z_DEV_APIKEY ?? "",
+		"User-Agent": process.env.USER_AGENT ?? "",
 	};
 
-    return headers;
+	if (token) {
+		headers["Z-Auth-Token"] = token;
+	}
+
+	return headers;
 }

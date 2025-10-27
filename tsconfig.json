@@ -2,7 +2,8 @@
 	"compilerOptions": {
 		// Percorsi di input e output
 		"rootDir": "./src",
-		"outDir": "./dist/functions",
+		// "outDir": "./dist/functions",
+		"outDir": "./dist",
 
 		// Compatibilità con Node.js e Netlify Functions
 		"target": "ES2020",
