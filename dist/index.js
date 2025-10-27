@@ -12,11 +12,10 @@ app.use(cors({
     methods: ["GET", "POST", "PUT", "DELETE"],
     allowedHeaders: ["content-type"],
 }));
-app.get("/", (req, res) => {
-    res.send("Hello, World!");
-});
-app.use("/auth/login", loginRoute);
+app.use("/auth/login", loginRoute); // url cambiato
+app.get("/", (req, res // url cambiato
+) => res.send("API attiva"));
 app.listen(PORT, "0.0.0.0", () => {
-    console.log("Server running on http://localhost:3000");
+    console.log("server listening on localhost:" + PORT);
 });
 //# sourceMappingURL=index.js.map

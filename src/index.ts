@@ -2,8 +2,6 @@ import express from "express";
 import loginRoute from "./routes/auth/loginRoute.js";
 import dotenv from "dotenv";
 
-import serverless from "serverless-http";
-
 import cors from "cors";
 
 dotenv.config();
@@ -23,10 +21,10 @@ app.use(
 	})
 );
 
-app.use("/.netlify/functions/index/auth/login", loginRoute);
+app.use("/auth/login", loginRoute); // url cambiato
 
-app.get("/.netlify/functions/index", (req, res) =>
-	res.send("API attiva su Netlify")
-);
+app.get("/", (req, res) => res.send("API attiva"));
 
-export const handler = serverless(app);
+app.listen(PORT, "0.0.0.0", () => {
+	console.log("server listening on localhost:" + PORT);
+});
