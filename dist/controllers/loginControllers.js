@@ -10,7 +10,6 @@ export const loginController = async (req, res) => {
             app_code: "CVVS",
         });
         console.log(result);
-        console.log(req.body);
         // Verifica che data esista
         if (!result.data) {
             return res.status(400).json({

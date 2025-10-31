@@ -11,6 +11,7 @@ async function sendRequest(endPoint, method, body, token) {
         else
             header = _headers();
         // console.log(header);
+        console.log("SendRequestBody: " + body);
         if (method === "POST") {
             response = await requestUtils.post(url, body, header);
         }
