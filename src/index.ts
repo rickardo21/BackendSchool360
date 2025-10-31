@@ -9,7 +9,7 @@ dotenv.config();
 
 const app = express();
 
-const PORT = Number(process.env.PORT) || 3000;
+const PORT = Number(process.env.PORT) || 8000;
 
 app.use(express.json());
 // app.use(authApiKey);
@@ -31,8 +31,8 @@ app.get("/health", (req, res) => {
 
 app.get("/", (req, res) => res.send("API attiva"));
 app.get("/health", (req, res) => {
-  res.status(200).json({ status: "ok" });
-}); // health checking 
+	res.status(200).json({ status: "ok" });
+}); // health checking
 
 app.listen(PORT, "0.0.0.0", () => {
 	console.log("server listening on localhost:" + PORT);
