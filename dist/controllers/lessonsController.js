@@ -5,7 +5,7 @@ export const lessonsController = async (req, res) => {
         const body = req.body;
         const tokenHeader = req.headers?.["auth-user-token"] || "";
         const token = Array.isArray(tokenHeader) ? tokenHeader[0] : tokenHeader;
-        const response = await sendRequest(`students/${body.ident.substring(1)}/lessons/${body.date}`, "GET", null, body);
+        const response = await sendRequest(`students/${body.ident.substring(1)}/lessons/${body.date}`, "GET", null, token);
         console.log(response);
         if (!response.data || !Array.isArray(response.data.lessons)) {
             return res.status(404).json({

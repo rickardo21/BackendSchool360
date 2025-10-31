@@ -18,11 +18,7 @@ export const loginController = async (req: Request, res: Response) => {
 		const result: RequestType<User> = await sendRequest<User>(
 			"auth/login",
 			"POST",
-			{
-				ident: "S9477262T",
-				pass: "Rickardo@07",
-				app_code: "CVVS",
-			}
+			body
 		);
 
 		console.log(result);
