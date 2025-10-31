@@ -20,6 +20,8 @@ export const loginController = async (req: Request, res: Response) => {
 			body
 		);
 
+		console.log(result);
+
 		console.log(req.body);
 
 		// Verifica che data esista
