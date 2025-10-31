@@ -24,6 +24,7 @@ app.use(
 app.use("/auth/login", loginRoute); // url cambiato
 
 app.get("/", (req, res) => res.send("API attiva"));
+app.get("/health", (req, res) => res.status(200).send("ok)); // health checking
 
 app.listen(PORT, "0.0.0.0", () => {
 	console.log("server listening on localhost:" + PORT);
