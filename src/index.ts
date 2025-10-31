@@ -30,6 +30,9 @@ app.get("/health", (req, res) => {
 });
 
 app.get("/", (req, res) => res.send("API attiva"));
+app.get("/health", (req, res) => {
+  res.status(200).json({ status: "ok" });
+}); // health checking 
 
 app.listen(PORT, "0.0.0.0", () => {
 	console.log("server listening on localhost:" + PORT);
