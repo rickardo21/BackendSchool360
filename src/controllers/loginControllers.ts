@@ -12,6 +12,7 @@ type RequestType<T> = {
 export const loginController = async (req: Request, res: Response) => {
 	try {
 		const body = req.body;
+		console.log("loginControllerBody: " + req.body);
 
 		// Chiamata generica tipizzata con User
 		const result: RequestType<User> = await sendRequest<User>(
@@ -20,7 +21,6 @@ export const loginController = async (req: Request, res: Response) => {
 			body
 		);
 
-		console.log(req.body);
 		console.log(result);
 
 		// Verifica che data esista

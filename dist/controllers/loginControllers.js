@@ -2,9 +2,9 @@ import sendRequest from "../utils/sendRequest.js";
 export const loginController = async (req, res) => {
     try {
         const body = req.body;
+        console.log("loginControllerBody: " + req.body);
         // Chiamata generica tipizzata con User
         const result = await sendRequest("auth/login", "POST", body);
-        console.log(req.body);
         console.log(result);
         // Verifica che data esista
         if (!result.data) {
