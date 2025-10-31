@@ -60,7 +60,7 @@ export type User = {
 	ident: string;
 	firstName: string;
 	lastName: string;
-	class: string;
+	class?: string;
 	lastMarks: string;
 	lastSubject: string;
 	marksColor: string;

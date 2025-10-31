@@ -1,6 +1,5 @@
 import type { Request, Response } from "express";
 import sendRequest from "../utils/sendRequest.js";
-import dateFormatter from "../utils/dateFormatter.js";
 import { Grades, Lessons, User } from "../models/type.js";
 import calcolaMedia from "../utils/media.js";
 
@@ -28,26 +27,6 @@ export const loginController = async (req: Request, res: Response) => {
 			});
 		}
 
-		// Richiesta delle lezioni tipizzando il dato atteso
-		const classDescResult = await sendRequest<Lessons>(
-			`students/${result.data.ident.substring(1)}/lessons/${dateFormatter(
-				result.data.release
-			)}`,
-			"GET",
-			null,
-			result.data.token
-		);
-
-		if (
-			!classDescResult.data ||
-			!Array.isArray(classDescResult.data.lessons) ||
-			classDescResult.data.lessons.length === 0
-		) {
-			return res.status(404).json({
-				message: "Lessons not found",
-			});
-		}
-
 		// Richiesta dei voti
 		const gradesResult = await sendRequest<Grades>(
 			`students/${result.data.ident.substring(1)}/grades`,
@@ -68,8 +47,6 @@ export const loginController = async (req: Request, res: Response) => {
 
 		// Aggiorna la proprietà class con sicurezza
 		const userData: User = result.data;
-
-		userData.class = classDescResult.data?.lessons?.[0]?.classDesc ?? "N/A";
 
 		userData.lastMarks =
 			gradesResult.data?.grades?.[0]?.displayValue ?? "N/A";

@@ -10,6 +10,7 @@ async function sendRequest(endPoint, method, body, token) {
             header = _headers(token);
         else
             header = _headers();
+        // console.log(header);
         if (method === "POST") {
             response = await requestUtils.post(url, body, header);
         }

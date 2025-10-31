@@ -3,6 +3,7 @@ import loginRoute from "./routes/auth/loginRoute.js";
 import dotenv from "dotenv";
 
 import cors from "cors";
+import lessonsRoute from "./routes/lessonsRoute.js";
 
 dotenv.config();
 
@@ -21,7 +22,12 @@ app.use(
 	})
 );
 
-app.use("/auth/login", loginRoute); // url cambiato
+app.use("/auth/login", loginRoute);
+app.use("/lessons", lessonsRoute);
+
+app.get("/health", (req, res) => {
+	res.status(200).json({ status: "ok" });
+});
 
 app.get("/", (req, res) => res.send("API attiva"));
 
