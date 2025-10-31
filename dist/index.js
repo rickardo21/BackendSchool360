@@ -11,7 +11,7 @@ app.use(express.json());
 app.use(cors({
     origin: process.env.CORS_ORIGIN, // DA CAMBIARE
     methods: ["GET", "POST", "PUT", "DELETE"],
-    allowedHeaders: ["content-type"],
+    allowedHeaders: ["content-type", "auth-user-token"],
 }));
 app.use("/auth/login", loginRoute);
 app.use("/lessons", lessonsRoute);
