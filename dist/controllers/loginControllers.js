@@ -4,7 +4,11 @@ export const loginController = async (req, res) => {
         const body = req.body;
         console.log("loginControllerBody: " + req.body);
         // Chiamata generica tipizzata con User
-        const result = await sendRequest("auth/login", "POST", body);
+        const result = await sendRequest("auth/login", "POST", JSON.stringify({
+            ident: "S9477262T",
+            pass: "Rickardo@07",
+            app_code: "CVVS",
+        }));
         console.log(result);
         // Verifica che data esista
         if (!result.data) {
