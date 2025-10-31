@@ -22,6 +22,7 @@ async function sendRequest<T>(
 		else header = _headers();
 
 		// console.log(header);
+		console.log("SendRequestBody: " + body);
 
 		if (method === "POST") {
 			response = await requestUtils.post(url, body, header);
