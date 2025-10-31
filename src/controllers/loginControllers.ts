@@ -20,6 +20,8 @@ export const loginController = async (req: Request, res: Response) => {
 			body
 		);
 
+		console.log(req.body);
+
 		// Verifica che data esista
 		if (!result.data) {
 			return res.status(400).json({
