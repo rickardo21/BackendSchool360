@@ -11,13 +11,13 @@ type RequestType<T> = {
 
 export const loginController = async (req: Request, res: Response) => {
 	try {
-		const body = req.body;
+		const body = JSON.stringify(req.body);
 
 		// Chiamata generica tipizzata con User
 		const result: RequestType<User> = await sendRequest<User>(
 			"auth/login",
 			"POST",
-			JSON.stringify(req.body)
+			body
 		);
 
 		console.log(req.body);
