@@ -20,7 +20,7 @@ export const lessonsController = async (req: Request, res: Response) => {
 			`students/${body.ident.substring(1)}/lessons/${body.date}`,
 			"GET",
 			null,
-			token
+			body
 		);
 
 		console.log(response);
