@@ -1,17 +1,32 @@
-import sendRequest from "../utils/sendRequest.js";
 export const loginController = async (req, res) => {
     try {
         const body = req.body;
         console.log("loginControllerBody: " + req.body);
         // Chiamata generica tipizzata con User
-        const result = await sendRequest("auth/login", "POST", body);
+        // const result: RequestType<User> = await sendRequest<User>(
+        // 	"auth/login",
+        // 	"POST",
+        // 	body
+        // );
+        console.log(process.env.Z_DEV_APIKEY);
+        console.log(process.env.USER_AGENT);
+        const resu = await fetch("https://web.spaggiari.eu/rest/v1/auth/login", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Z-Dev-ApiKey": process.env.Z_DEV_APIKEY ?? "",
+                "User-Agent": process.env.USER_AGENT ?? "",
+            },
+            body: JSON.stringify(body),
+        });
+        const result = await resu.json();
         console.log(result);
         // Verifica che data esista
-        if (!result.data) {
-            return res.status(400).json({
-                message: result.message || "data is null",
-            });
-        }
+        // if (!result.data) {
+        // 	return res.status(400).json({
+        // 		message: result.message || "data is null",
+        // 	});
+        // }
         // // Richiesta dei voti
         // const gradesResult = await sendRequest<Grades>(
         // 	`students/${result.data.ident.substring(1)}/grades`,
@@ -50,7 +65,7 @@ export const loginController = async (req, res) => {
         // 		: "#3ce339aa";
         // userData.mediaVoti =
         // 	Math.round(calcolaMedia(gradesResult.data) * 10) / 10;
-        return res.status(result.status).json(result);
+        return res.status(resu.status).json(result);
     }
     catch (error) {
         return res.status(500).json({
