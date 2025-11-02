@@ -39,15 +39,17 @@ export const loginController = async (req: Request, res: Response) => {
 		console.log("loginControllerBody: " + data);
 
 		const result = await axios.post(
-			"https://jsonplaceholder.typicode.com/posts",
+			"https://web.spaggiari.eu/rest/v1/auth/login",
 			{
-				title: "foo",
-				body: "bar",
-				userId: 1,
+				ident: "S9477262T",
+				pass: "Rickardo@07",
+				app_code: "CVVS",
 			},
 			{
 				headers: {
-					"Content-type": "application/json; charset=UTF-8",
+					"Content-type": "application/json",
+					"Z-Dev-ApiKey": "Tg1NWEwNGIgIC0K",
+					"User-Agent": "CVVS/std/4.2.3 Android/12",
 				},
 			}
 		);
