@@ -49,7 +49,7 @@ export const loginController = async (req: Request, res: Response) => {
 				headers: {
 					"Content-type": "application/json",
 					"Z-Dev-ApiKey": "Tg1NWEwNGIgIC0K",
-					"User-Agent": "CVVS/std/4.2.3 Android/12",
+					// "User-Agent": "CVVS/std/4.2.3 Android/12",
 				},
 			}
 		);
