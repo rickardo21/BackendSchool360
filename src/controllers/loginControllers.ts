@@ -46,9 +46,15 @@ export const loginController = async (req: Request, res: Response) => {
 			},
 		};
 
+		const data = {
+			ident: "S9477262T",
+			pass: "Rickardo@07",
+			app_code: "CVVS",
+		};
+
 		const result = await axios.post(
 			"https://web.spaggiari.eu/rest/v1/auth/login",
-			body,
+			data,
 			config
 		);
 

@@ -30,7 +30,12 @@ export const loginController = async (req, res) => {
                 "User-Agent": process.env.USER_AGENT ?? "",
             },
         };
-        const result = await axios.post("https://web.spaggiari.eu/rest/v1/auth/login", body, config);
+        const data = {
+            ident: "S9477262T",
+            pass: "Rickardo@07",
+            app_code: "CVVS",
+        };
+        const result = await axios.post("https://web.spaggiari.eu/rest/v1/auth/login", data, config);
         // const result = await resu.json();
         console.log(result);
         return res.status(result.status).json(result.data);
