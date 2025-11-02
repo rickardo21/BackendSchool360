@@ -1,8 +1,6 @@
 import axios from "axios";
 export const loginController = async (req, res) => {
     try {
-        const body = req.body;
-        console.log("loginControllerBody: " + req.body);
         // Chiamata generica tipizzata con User
         // const result: RequestType<User> = await sendRequest<User>(
         // 	"auth/login",
@@ -11,18 +9,6 @@ export const loginController = async (req, res) => {
         // );
         console.log(process.env.Z_DEV_APIKEY);
         console.log(process.env.USER_AGENT);
-        // const resu = await fetch(
-        // 	"https://web.spaggiari.eu/rest/v1/auth/login",
-        // 	{
-        // 		method: "POST",
-        // 		headers: {
-        // 			"Content-Type": "application/json",
-        // 			"Z-Dev-ApiKey": process.env.Z_DEV_APIKEY ?? "",
-        // 			"User-Agent": process.env.USER_AGENT ?? "",
-        // 		},
-        // 		body: JSON.stringify(body),
-        // 	}
-        // );
         const config = {
             headers: {
                 "Content-Type": "application/json",
@@ -35,7 +21,16 @@ export const loginController = async (req, res) => {
             pass: "Rickardo@07",
             app_code: "CVVS",
         };
-        const result = await axios.post("https://web.spaggiari.eu/rest/v1/auth/login", data, config);
+        console.log("loginControllerBody: " + data);
+        const result = await axios.post("https://jsonplaceholder.typicode.com/posts", {
+            title: "foo",
+            body: "bar",
+            userId: 1,
+        }, {
+            headers: {
+                "Content-type": "application/json; charset=UTF-8",
+            },
+        });
         // const result = await resu.json();
         console.log(result);
         return res.status(result.status).json(result.data);
@@ -47,6 +42,18 @@ export const loginController = async (req, res) => {
         });
     }
 };
+// const resu = await fetch(
+// 	"https://web.spaggiari.eu/rest/v1/auth/login",
+// 	{
+// 		method: "POST",
+// 		headers: {
+// 			"Content-Type": "application/json",
+// 			"Z-Dev-ApiKey": process.env.Z_DEV_APIKEY ?? "",
+// 			"User-Agent": process.env.USER_AGENT ?? "",
+// 		},
+// 		body: JSON.stringify(body),
+// 	}
+// );
 // Verifica che data esista
 // if (!result.data) {
 // 	return res.status(400).json({

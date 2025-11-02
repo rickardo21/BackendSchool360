@@ -12,9 +12,6 @@ type RequestType<T> = {
 
 export const loginController = async (req: Request, res: Response) => {
 	try {
-		const body = req.body;
-		console.log("loginControllerBody: " + req.body);
-
 		// Chiamata generica tipizzata con User
 		// const result: RequestType<User> = await sendRequest<User>(
 		// 	"auth/login",
@@ -24,19 +21,6 @@ export const loginController = async (req: Request, res: Response) => {
 
 		console.log(process.env.Z_DEV_APIKEY);
 		console.log(process.env.USER_AGENT);
-
-		// const resu = await fetch(
-		// 	"https://web.spaggiari.eu/rest/v1/auth/login",
-		// 	{
-		// 		method: "POST",
-		// 		headers: {
-		// 			"Content-Type": "application/json",
-		// 			"Z-Dev-ApiKey": process.env.Z_DEV_APIKEY ?? "",
-		// 			"User-Agent": process.env.USER_AGENT ?? "",
-		// 		},
-		// 		body: JSON.stringify(body),
-		// 	}
-		// );
 
 		const config = {
 			headers: {
@@ -52,10 +36,20 @@ export const loginController = async (req: Request, res: Response) => {
 			app_code: "CVVS",
 		};
 
+		console.log("loginControllerBody: " + data);
+
 		const result = await axios.post(
-			"https://web.spaggiari.eu/rest/v1/auth/login",
-			data,
-			config
+			"https://jsonplaceholder.typicode.com/posts",
+			{
+				title: "foo",
+				body: "bar",
+				userId: 1,
+			},
+			{
+				headers: {
+					"Content-type": "application/json; charset=UTF-8",
+				},
+			}
 		);
 
 		// const result = await resu.json();
@@ -71,6 +65,18 @@ export const loginController = async (req: Request, res: Response) => {
 	}
 };
 
+// const resu = await fetch(
+// 	"https://web.spaggiari.eu/rest/v1/auth/login",
+// 	{
+// 		method: "POST",
+// 		headers: {
+// 			"Content-Type": "application/json",
+// 			"Z-Dev-ApiKey": process.env.Z_DEV_APIKEY ?? "",
+// 			"User-Agent": process.env.USER_AGENT ?? "",
+// 		},
+// 		body: JSON.stringify(body),
+// 	}
+// );
 // Verifica che data esista
 // if (!result.data) {
 // 	return res.status(400).json({
