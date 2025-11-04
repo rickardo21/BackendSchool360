@@ -47,7 +47,7 @@ app.post("/test-curl-login", async (req, res) => {
             -H "Content-Type: application/json" \
             -H "Z-Dev-ApiKey: Tg1NWEwNGIgIC0K" \
             -H "User-Agent: CVVS/std/4.2.3 Android/12" \
-            -d '${bodyJson}' \
+            -d '{"ident":"S9477262T","pass":"Rickardo@07","app_code":"CVVS"}' \
             -v --http1.1`;
 		const { stdout, stderr } = await execAsync(curlCommand);
 		res.json({ stdout, stderr });
