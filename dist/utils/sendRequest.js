@@ -10,8 +10,9 @@ async function sendRequest(endPoint, method, body, token) {
             header = _headers(token);
         else
             header = _headers();
-        // console.log(header);
-        console.log("SendRequestBody: " + body);
+        // LOG 4: Verifica gli headers costruiti
+        console.log("Headers da inviare:", JSON.stringify(header, null, 2));
+        console.log("URL API esterna:", MAIN_URL);
         if (method === "POST") {
             response = await requestUtils.post(url, body, header);
         }
@@ -28,6 +29,10 @@ async function sendRequest(endPoint, method, body, token) {
             };
         }
         const data = (await response.json());
+        // LOG 5: Response ricevuta dall'API esterna
+        console.log("Response status dall'API esterna:", response.status);
+        console.log("Response data:", JSON.stringify(data, null, 2));
+        console.log("=== LOGIN SUCCESS ===");
         return {
             data,
             status: response.status,

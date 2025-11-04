@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 
 import cors from "cors";
 import lessonsRoute from "./routes/lessonsRoute.js";
+import { authApiKey } from "./middleware/authApiKey.js";
 
 dotenv.config();
 

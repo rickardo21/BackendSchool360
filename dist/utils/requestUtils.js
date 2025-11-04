@@ -1,6 +1,5 @@
 const post = async (url, body, header) => {
-    console.log("PostRequestBody: " + body);
-    console.log("PostRequestJsonBody: " + JSON.stringify(body));
+    console.log("JSON.Stringify del body = : " + JSON.stringify(body));
     const response = await fetch(url, {
         method: "POST",
         headers: header,

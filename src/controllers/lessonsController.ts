@@ -23,8 +23,6 @@ export const lessonsController = async (req: Request, res: Response) => {
 			token
 		);
 
-		console.log(response);
-
 		if (!response.data || !Array.isArray(response.data.lessons)) {
 			return res.status(404).json({
 				message: "lessons not found",
