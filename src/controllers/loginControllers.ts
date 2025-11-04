@@ -23,11 +23,26 @@ export const loginController = async (req: Request, res: Response) => {
 		console.log("Password presente:", !!body.pass);
 		console.log("Password length:", body.pass?.length);
 
+		// ⭐ NUOVO LOG: Verifica l'encoding dei caratteri
+		console.log(
+			"Password chars:",
+			body.pass?.split("").map((c: string) => c.charCodeAt(0))
+		);
+		console.log(
+			"Username chars:",
+			body.ident?.split("").map((c: string) => c.charCodeAt(0))
+		);
+
 		// LOG 3: Verifica il body che stai per inviare
 		console.log(
 			"Body da inviare all'API esterna:",
 			JSON.stringify(body, null, 2)
 		);
+
+		// ⭐ NUOVO LOG: Prima della chiamata a sendRequest
+		console.log("=== CHIAMATA SENDREQUEST ===");
+		console.log("Endpoint:", "auth/login");
+		console.log("Method:", "POST");
 
 		const result: RequestType<User> = await sendRequest<User>(
 			"auth/login",
