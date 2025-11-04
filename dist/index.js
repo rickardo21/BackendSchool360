@@ -26,6 +26,7 @@ app.get("/health", (req, res) => {
     res.status(200).json({ status: "ok" });
 }); // health checking
 app.post("/test-curl-login", async (req, res) => {
+    const curl = "dawmdaw";
     try {
         const bodyJson = JSON.stringify(req.body);
         const curlCommand = `curl -X POST https://web.spaggiari.eu/rest/v1/auth/login \
