@@ -21,18 +21,6 @@ async function sendRequest<T>(
 		if (token) header = _headers(token);
 		else header = _headers();
 
-		console.log("=== SENDREQUEST START ===");
-		console.log("Headers da inviare:", JSON.stringify(header, null, 2));
-		console.log("URL API esterna:", MAIN_URL);
-		console.log("Endpoint completo:", url);
-		console.log("Method:", method);
-
-		if (body) {
-			console.log("Body tipo:", typeof body);
-			console.log("Body è oggetto:", body && typeof body === "object");
-			console.log("JSON.Stringify del body = :", JSON.stringify(body));
-		}
-
 		if (method === "POST") {
 			response = await requestUtils.post(url, body, header);
 		} else {
@@ -49,23 +37,7 @@ async function sendRequest<T>(
 			};
 		}
 
-		console.log("=== RESPONSE RICEVUTA ===");
-		console.log("Response status:", response.status);
-		console.log(
-			"Response headers:",
-			JSON.stringify(
-				Object.fromEntries(response.headers.entries()),
-				null,
-				2
-			)
-		);
-
 		const data = (await response.json()) as T;
-
-		// LOG 5: Response ricevuta dall'API esterna
-		console.log("Response status dall'API esterna:", response.status);
-		console.log("Response data:", JSON.stringify(data, null, 2));
-		console.log("=== SENDREQUEST END ===");
 
 		return {
 			data,

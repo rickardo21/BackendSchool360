@@ -7,7 +7,7 @@ export const testHttp1LoginController = async (req, res) => {
         const body = req.body;
         // Agent HTTPS per forzare HTTP/1.1
         const httpsAgent = new https.Agent({
-            keepAlive: true,
+            keepAlive: false,
             maxSockets: 1,
         });
         const response = await axios({

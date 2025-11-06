@@ -25,23 +25,6 @@ app.get("/", (req, res) => res.send("API attiva"));
 app.get("/health", (req, res) => {
     res.status(200).json({ status: "ok" });
 }); // health checking
-app.post("/test-curl-login", async (req, res) => {
-    const curl = "dawmdaw";
-    try {
-        const bodyJson = JSON.stringify(req.body);
-        const curlCommand = `curl -X POST https://web.spaggiari.eu/rest/v1/auth/login \
-            -H "Content-Type: application/json" \
-            -H "Z-Dev-ApiKey: Tg1NWEwNGIgIC0K" \
-            -H "User-Agent: CVVS/std/4.2.3 Android/12" \
-            -d '{"ident":"S9477262T","pass":"Rickardo@07","app_code":"CVVS"}' \
-            -v --http1.1`;
-        const { stdout, stderr } = await execAsync(curlCommand);
-        res.json({ stdout, stderr });
-    }
-    catch (error) {
-        res.status(500).json({ error: error.message });
-    }
-});
 app.listen(PORT, "0.0.0.0", () => {
     console.log("server listening on localhost:" + PORT);
 });

@@ -1,11 +1,4 @@
 export function _headers(token) {
-    console.log("=== BUILDING HEADERS ===");
-    console.log("Z_DEV_APIKEY from env:", process.env.Z_DEV_APIKEY);
-    console.log("Z_DEV_APIKEY length:", process.env.Z_DEV_APIKEY?.length);
-    console.log("Z_DEV_APIKEY bytes:", Buffer.from(process.env.Z_DEV_APIKEY ?? "").toString("hex"));
-    console.log("USER_AGENT from env:", process.env.USER_AGENT);
-    console.log("USER_AGENT length:", process.env.USER_AGENT?.length);
-    console.log("Token presente:", !!token);
     var headers = {
         "Content-Type": "application/json",
         "Z-Dev-ApiKey": process.env.Z_DEV_APIKEY ?? "",
@@ -14,8 +7,6 @@ export function _headers(token) {
     if (token) {
         headers["Z-Auth-Token"] = token;
     }
-    console.log("Headers costruiti:", JSON.stringify(headers, null, 2));
-    console.log("=== HEADERS READY ===");
     return headers;
 }
 //# sourceMappingURL=headerUtils.js.map

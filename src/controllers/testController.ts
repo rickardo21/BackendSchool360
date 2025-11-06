@@ -11,7 +11,7 @@ export const testHttp1LoginController = async (req: Request, res: Response) => {
 
 		// Agent HTTPS per forzare HTTP/1.1
 		const httpsAgent = new https.Agent({
-			keepAlive: true,
+			keepAlive: false,
 			maxSockets: 1,
 		});
 

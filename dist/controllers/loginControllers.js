@@ -2,23 +2,7 @@ import sendRequest from "../utils/sendRequest.js";
 import calcolaMedia from "../utils/media.js";
 export const loginController = async (req, res) => {
     try {
-        console.log("=== LOGIN REQUEST START ===");
-        console.log("Body ricevuto:", JSON.stringify(req.body, null, 2));
-        console.log("Headers ricevuti:", JSON.stringify(req.headers, null, 2));
         const body = req.body;
-        // LOG 2: Verifica i dati estratti
-        console.log("Username estratto:", body.ident);
-        console.log("Password presente:", !!body.pass);
-        console.log("Password length:", body.pass?.length);
-        // ⭐ NUOVO LOG: Verifica l'encoding dei caratteri
-        console.log("Password chars:", body.pass?.split("").map((c) => c.charCodeAt(0)));
-        console.log("Username chars:", body.ident?.split("").map((c) => c.charCodeAt(0)));
-        // LOG 3: Verifica il body che stai per inviare
-        console.log("Body da inviare all'API esterna:", JSON.stringify(body, null, 2));
-        // ⭐ NUOVO LOG: Prima della chiamata a sendRequest
-        console.log("=== CHIAMATA SENDREQUEST ===");
-        console.log("Endpoint:", "auth/login");
-        console.log("Method:", "POST");
         const result = await sendRequest("auth/login", "POST", body);
         if (!result.data) {
             return res.status(400).json({
