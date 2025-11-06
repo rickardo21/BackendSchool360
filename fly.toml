@@ -1,4 +1,4 @@
-app = "BackendSchool360"
+app = "backendschool360"
 
 [build]
   command = "npm install && npm run build"
