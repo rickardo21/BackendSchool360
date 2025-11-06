@@ -1,0 +1,11 @@
+app = "BackendSchool360"
+
+[build]
+  command = "npm install && npm run build"
+
+[experimental]
+  allowed_public_ports = [8080] 
+  auto_rollback = true
+
+[processes]
+  app = "node dist/index.js"

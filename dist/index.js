@@ -8,7 +8,7 @@ import { promisify } from "util";
 const execAsync = promisify(exec);
 dotenv.config();
 const app = express();
-const PORT = Number(process.env.PORT) || 8000;
+const PORT = Number(process.env.PORT) || 8080;
 app.use(express.json());
 // app.use(authApiKey);
 app.use(cors({
