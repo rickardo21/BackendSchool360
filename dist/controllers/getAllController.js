@@ -20,7 +20,9 @@ export const getAllController = async (req, res) => {
             return res.status(assenze.status).send(assenze.message);
         }
         const date = dateFormatter(user.release);
+        console.log(date);
         const todaystatus = await sendRequest(`students/${ident}/absences/details/${date}/${date}`, "GET", null, token);
+        console.log(todaystatus.data);
         if (!todaystatus.data) {
             return res.status(todaystatus.status).send(todaystatus.message);
         }

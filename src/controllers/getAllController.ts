@@ -47,12 +47,16 @@ export const getAllController = async (req: Request, res: Response) => {
 
 		const date = dateFormatter(user.release);
 
+		console.log(date);
+
 		const todaystatus = await sendRequest<Absences>(
 			`students/${ident}/absences/details/${date}/${date}`,
 			"GET",
 			null,
 			token
 		);
+
+		console.log(todaystatus.data);
 
 		if (!todaystatus.data) {
 			return res.status(todaystatus.status).send(todaystatus.message);
