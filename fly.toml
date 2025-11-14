@@ -1,11 +1,28 @@
-app = "backendschool360"
+# fly.toml app configuration file generated for backendschool360 on 2025-11-06T21:41:16+01:00
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
 
-[build]
-  command = "npm install && npm run build"
+app = 'backendschool360'
+primary_region = 'fra'
 
 [experimental]
-  allowed_public_ports = [8080] 
   auto_rollback = true
 
+[build]
+
 [processes]
-  app = "node dist/index.js"
+  app = 'node dist/index.js'
+
+[http_service]
+  internal_port = 8080
+  force_https = true
+  auto_stop_machines = 'stop'
+  auto_start_machines = true
+  min_machines_running = 0
+  processes = ['app']
+
+[[vm]]
+  memory = '1gb'
+  cpu_kind = 'shared'
+  cpus = 1

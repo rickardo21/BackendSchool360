@@ -4,28 +4,25 @@ import { Grades, Lessons, User } from "../models/type.js";
 import calcolaMedia from "../utils/media.js";
 import axios from "axios";
 
-type RequestType<T> = {
-	data?: T | null;
-	status: number;
-	message?: string;
-};
-
 export const loginController = async (req: Request, res: Response) => {
 	try {
+		// CONST
 		const body = req.body;
 
-		const result: RequestType<User> = await sendRequest<User>(
-			"auth/login",
-			"POST",
-			body
-		);
+		// VARIABLE
+		let userData: User;
 
+		// LOGIN_RESPONSE
+		const result = await sendRequest<User>("auth/login", "POST", body);
+
+		// CHECK IF THE LOGIN_RESPONSE IS OK
 		if (!result.data) {
 			return res.status(400).json({
 				message: result.message || "data is null",
 			});
 		}
 
+		// GRADE_RESPONSE
 		const gradesResult = await sendRequest<Grades>(
 			`students/${result.data.ident.substring(1)}/grades`,
 			"GET",
@@ -33,6 +30,7 @@ export const loginController = async (req: Request, res: Response) => {
 			result.data.token
 		);
 
+		// CHECK IF THE GRADE_RESPONSE IS OK
 		if (
 			!gradesResult.data ||
 			!Array.isArray(gradesResult.data.grades) ||
@@ -43,35 +41,10 @@ export const loginController = async (req: Request, res: Response) => {
 			});
 		}
 
-		const userData: User = result.data;
+		// ADDING ADDICTIONAL INFO TO THE USER
+		userData = addInfoToUser(result.data, gradesResult.data);
 
-		userData.lastMarks =
-			gradesResult.data?.grades?.[0]?.displayValue ?? "N/A";
-
-		let subject;
-
-		const str =
-			gradesResult.data.grades[0]!.subjectDesc.trim().split(/\s+/);
-		if (str.length > 1) {
-			subject = str[0] + "...";
-		} else subject = str[0];
-
-		userData.lastSubject = subject ? subject : "N/A";
-
-		const mark = gradesResult.data?.grades?.[0]?.decimalValue ?? "a";
-
-		userData.marksColor =
-			mark == "a"
-				? "#18b2ff5c"
-				: mark >= 5 && mark < 6
-				? "#ff7418aa"
-				: mark < 5
-				? "#ff4d4da2"
-				: "#3ce339aa";
-
-		userData.mediaVoti =
-			Math.round(calcolaMedia(gradesResult.data) * 10) / 10;
-
+		// RETURN THE DATA
 		return res.status(result.status).json(userData);
 	} catch (error) {
 		return res.status(500).json({
@@ -79,4 +52,33 @@ export const loginController = async (req: Request, res: Response) => {
 			error: error instanceof Error ? error.message : error,
 		});
 	}
+};
+
+const addInfoToUser = (userResponse: User, gradesResult: Grades) => {
+	let userData = userResponse;
+
+	let subject;
+	userData.lastMarks = gradesResult.grades?.[0]?.displayValue ?? "N/A";
+
+	const str = gradesResult.grades[0]!.subjectDesc.trim().split(/\s+/);
+	if (str.length > 1) {
+		subject = str[0] + "...";
+	} else subject = str[0];
+
+	userData.lastSubject = subject ? subject : "N/A";
+
+	const mark = gradesResult.grades?.[0]?.decimalValue ?? "a";
+
+	userData.marksColor =
+		mark == "a"
+			? "#18b2ff5c"
+			: mark >= 5 && mark < 6
+			? "#ff7418aa"
+			: mark < 5
+			? "#ff4d4da2"
+			: "#3ce339aa";
+
+	userData.mediaVoti = Math.round(calcolaMedia(gradesResult) * 10) / 10;
+
+	return userData;
 };
